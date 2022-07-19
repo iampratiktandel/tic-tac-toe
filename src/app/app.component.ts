@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -13,23 +12,17 @@ export class AppComponent {
   public isCross: boolean;
   public itemArray: string[];
 
-  constructor(private toastr: ToastrService) {
+  constructor() {
     this.winMessage = '';
     this.isCross = false;
     this.itemArray = new Array(9).fill('empty');
   }
 
   public handleClick(itemNumber: number) {
-    if (this.winMessage) {
-      return this.toastr.success(this.winMessage);
-    }
-
     if (this.itemArray[itemNumber] === 'empty') {
       this.itemArray[itemNumber] = this.isCross ? 'cross' : 'circle';
 
       this.isCross = !this.isCross;
-    } else {
-      return this.toastr.info('Already filled');
     }
 
     this.checkIsWinner();
